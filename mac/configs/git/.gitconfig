@@ -1,0 +1,56 @@
+[user]
+	name = Tom Burdak
+	email = tom.burdak@gmail.com
+
+[alias]
+	d=diff --color
+	st=status
+	co=checkout
+	cob=checkout -b
+
+	# HISTORY
+	# Files in a commit
+	files-commit=git diff-tree --no-commit-id --name-only -r
+	# History of a file including name changes
+	file-hist=git log --follow -p --oneline
+	#Squash last n commits
+	squashn="!sh -c 'git rebase -i HEAD~$0'"
+
+	# Merging
+	msq=merge --squash
+	m=merge --no-ff
+	mff=merge --ff-only
+
+[core]
+	excludesfile = /Users/tombu/.gitignore_global
+	editor = open -e -W -n
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[commit]
+	template = /Users/tombu/.stCommitMsg
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[pager]
+	branch = false
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = true
+	autostash = true
+
+[fetch]
+	prune = true
